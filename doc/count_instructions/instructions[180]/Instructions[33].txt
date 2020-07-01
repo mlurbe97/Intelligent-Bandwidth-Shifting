@@ -1,0 +1,5 @@
+Temps: 180, Delay: 100
+Number of quantums set to 1800.
+
+<!> Error during startup: Obsolete section name [Cmdenv] found, please convert the ini file to 4.x format.
+count_instructions_2017: cannot attach event cycles

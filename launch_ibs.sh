@@ -59,11 +59,11 @@ case "$ARRAY" in
       helpFunction;; 
 esac
 
-{ ./startExperiments_Script.sh; }
+{ ./start_Experiments.sh; }
 
 for workload in $workloadArray
 do
       sudo ./IBS -A $workload -F -Q 2>> ${DIROUT}/trabajo[${workload}]conf[ibs].txt
 done;
 
-{ ./endExperiments_Script.sh; }
+{ ./end_Experiments.sh; }
