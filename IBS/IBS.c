@@ -596,26 +596,26 @@ static void get_countsv2(node *aux){
 		if(i==0){
 			//Ciclos
 			aux->a_ciclos = val;
-			if(!(node->finished)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
+			if(!(aux->finalizado)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
 				aux->totes_ciclos += val;
 			}
 		}else if(i==1){
 			//Instrucciones
 			aux->a_instrucciones = val;
 			aux->tot_instrucciones += val;
-			if(!(node->finished)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
+			if(!(aux->finalizado)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
 				aux->totes_instruccions += val;
 			}
 		}else if(i==3){
 			//LLC-Load-Misses
 			aux->a_LLC_LOAD_MISSES = val;
-			if(!(node->finished)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
+			if(!(aux->finalizado)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
 				aux->totes_LLC_LOAD_MISSES += val;
 			}
 		}else if(i==4){
 			//PM_MEM_PREF
 			aux->a_PM_MEM_PREF = val;
-			if(!(node->finished)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
+			if(!(aux->finalizado)){//como se quiere almacenar solo el target instructions hay que poner este if para que deje de guardar los resultados del core que termina.
 				aux->totes_PM_MEM_PREF += val;
 			}
 		}
@@ -1116,6 +1116,7 @@ while ((c=getopt(argc, argv,"hgvPODQFA:d:S:N:c:b:m:B:")) != -1) {
 			break;
 		case 'B':
 			g_stats.p2bThreshold = atof(optarg);
+			break;
 		case 'g':
 			options.group = 1;
 			break;

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+rm -rf ../working_dir/libpfm-4.10.1/perf_examples/IBS*
+
+if cp Makefile IBS.c ../working_dir/libpfm-4.10.1/perf_examples/ ; then
+	if cd ../working_dir/libpfm-4.10.1/perf_examples/ ; then
+		if make ; then
+			if cp -rf IBS ../../ ; then
+				echo "Proceso terminado correctamente."
+			else
+				echo "Error al copiar los programas."
+			fi
+		else
+			echo "Error al compilar el programa."
+		fi
+	else
+		echo "Error al cambiar de directorio."
+	fi
+else
+	echo "Error de copia de los ficheros."
+fi

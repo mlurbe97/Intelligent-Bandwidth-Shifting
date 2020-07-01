@@ -30,11 +30,11 @@ then
    helpFunction
 fi
 
-if mkdir outManel/${DIROUT} ; then
-    echo \#Directory created working_dir/outManel/${DIROUT}\#
+if mkdir IBS_res/${DIROUT} ; then
+    echo \#Directory created working_dir/IBS_res/${DIROUT}\#
 else
     echo ""
-    echo \#Error creating directory working_dir/outManel/${DIROUT}\#
+    echo \#Error creating directory working_dir/IBS_res/${DIROUT}\#
     echo \#The directory may already exist\#
     echo ""
 fi
@@ -46,13 +46,13 @@ case "$ARRAY" in
    "a") workloadArray="2 3 5 6 7 8 9 10 11 12 13 16 17 18 20 22 23";;## 6 applications workload.
       
    #case 2 
-   "b") repArray="26 27 28 29 30 31 32 33 34 35 36 37 38 39" ;;# 8 applications workload.
+   "b") repArray="24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39" ;;# 8 applications workload.
 
    #case 3 
    "c") workloadArray="40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55" ;;## 10 applications workload.
 
    #case 4 
-   "d") workloadArray="26 27 28 29 30 31 32 33 34 35 36 37 38 39 42 43 44 45 46 47 48 49 50 51 52 53 54 55" ;;# Custom applications workload.
+   "d") workloadArray="2 3 5 6 7 8 9 10 11 12 13 16 17 18 20 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55" ;;# Custom applications workload.
 
    #case 7 
    *) echo "Invalid entry for repArray."
@@ -63,7 +63,7 @@ esac
 
 for workload in $workloadArray
 do
-      sudo ./IBS -A $workload -F -Q 2>> ${DIROUT}/trabajo[${workload}]conf[ibs].txt
+      sudo ./IBS -A $workload -F -Q 2>> /home/malursem/working_dir/IBS_res/${DIROUT}/trabajo[${workload}]conf[ibs].txt
 done;
 
 { ./end_Experiments.sh; }
