@@ -1,4 +1,0 @@
-Temps: 180, Delay: 100
-Number of quantums set to 1800.
-PMU_COUNTS:	        664695869931	        747512744101	
-Quantums: 1800
