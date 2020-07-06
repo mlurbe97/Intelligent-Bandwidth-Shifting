@@ -16,6 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+echo ''
+echo 'IBS implementation Copyright (C) 2020 Manel Lurbe Sempere <malursem@inf.upv.es>.'
+echo 'This program comes with ABSOLUTELY NO WARRANTY; for details type show w.'
+echo 'This is free software, and you are welcome to redistribute it under certain conditions type show c for details.'
+echo ''
+
 rm -rf ../working_dir/libpfm-4.10.1/perf_examples/IBS*
 
 if cp Makefile IBS.c ../working_dir/libpfm-4.10.1/perf_examples/ ; then
