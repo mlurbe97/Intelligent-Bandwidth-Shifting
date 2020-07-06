@@ -14,4 +14,4 @@
 
 - Use [libperf](https://github.com/mlurbe97/Intelligent-Bandwidth-Shifting/blob/master/doc/lib) library for C to compile the scheduler [IBS.c](https://github.com/mlurbe97/Intelligent-Bandwidth-Shifting/blob/master/IBS/IBS.c).
 
-- To run the scheduler just launch this script as super user -> [launch_ibs.sh](https://github.com/mlurbe97/Intelligent-Bandwidth-Shifting/blob/master/doc/launch_scripts/launch_ibs.sh).
+- To run the scheduler just launch this script as super user -> [launch_ibs](https://github.com/mlurbe97/Intelligent-Bandwidth-Shifting/blob/master/doc/launch_scripts/launch_ibs).
