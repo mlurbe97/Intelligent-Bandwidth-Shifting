@@ -28,16 +28,16 @@ if cp Makefile IBS.c ../working_dir/libpfm-4.10.1/perf_examples/ ; then
 	if cd ../working_dir/libpfm-4.10.1/perf_examples/ ; then
 		if make ; then
 			if cp -rf IBS ../../ ; then
-				echo "Proceso terminado correctamente."
+				echo "Process finished successfully."
 			else
-				echo "Error al copiar los programas."
+				echo "Error copying programs."
 			fi
 		else
-			echo "Error al compilar el programa."
+			echo "Error compiling the program."
 		fi
 	else
-		echo "Error al cambiar de directorio."
+		echo "Error changing the directory."
 	fi
 else
-	echo "Error de copia de los ficheros."
+	echo "Error coping files."
 fi
