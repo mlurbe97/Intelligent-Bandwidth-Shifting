@@ -270,7 +270,7 @@ char *benchmarks[][200] = {
  **                   Nombre de los benchmarks              **
  *************************************************************/
 
-char *benchNames [] = {
+char *bench_Names [] = {
 	"perlbench","bzip2","gcc","mcf","gobmk","hmmer","sjeng","libquantum",//0--7
 	"h264ref","omnetpp","astar","xalancbmk","bwaves","gamess","milc","zeusmp",//8--15
 	"gromacs","cactusADM","leslie3d","namd","microbench","soplex","povray","GemsFDTD",//16--23
@@ -285,7 +285,7 @@ char *benchNames [] = {
  *************************************************************/
 
 // Instrucciones para 120 segundos (2 minutios)
-/* unsigned long int instruccions_totals [] = {
+/* unsigned long int bench_Instructions [] = {
   0, 558309327207, 5421059240140, 186483654001, 0,776504509655,614626187081,			//0--6
   480070400876,802635200538,261219407437,428862715907,470328894765,428418848680,		//7--12
   886931409787,204234912479,504060702499,463926761740,843934894626,492910117299,		//13--18
@@ -296,7 +296,7 @@ char *benchNames [] = {
   699336372454, 569340162845, 638377593187												//49--51
 }; */
 // Instrucciones para 180 segundos (3 minutios)
-unsigned long int instruccions_totals [] = {
+unsigned long int bench_Instructions [] = {
 	0,840132874602,819265952766,305499573366,0,1164472528358,918983143036,720473356695,//0--7
 	1203024206200,286223875335,535640883080,668801495501,618761719072,1336258416852,304422500623,754511132579,//8--15
 	696156907677,1267656091383,739994193451,747682249857,76418176477,569440597876,937431955168,567490647155,//16--23
@@ -310,7 +310,7 @@ unsigned long int instruccions_totals [] = {
  **                   Tamaño de la mezcla                   **
  *************************************************************/
 
-int nmezclas [] = { // Numero de cargas que contiene la mezcla
+int bench_mixes [] = { // Numero de cargas que contiene la mezcla
 	1,	// 0	NO MODIFICAR aplicacion seleccionada en solitario.
 	4,	// 1	NO MODIFICAR Benchmark y aplicacion seleccionada.
 
@@ -379,7 +379,7 @@ int nmezclas [] = { // Numero de cargas que contiene la mezcla
  **                 Composicion de la mezcla                **
  *************************************************************/
 
-int mezclas [][12] = { // Cargas a ejecutar
+int workload_mixes [][12] = { // Cargas a ejecutar
 	{-1},// 0	NO MODIFICAR aplicacion seleccionada en solitario.
 	{-1,20,20,20},// 1	NO MODIFICAR Benchmark y aplicacion seleccionada.
 	
@@ -502,7 +502,7 @@ static void print_quantum_values(){
 	
 	for (i=0; i<N; i++) {
 		fprintf(stdout, "QuantumCounters:\t");
-		fprintf(stdout, "%s\t", benchNames[queue[i].benchmark] );
+		fprintf(stdout, "%s\t", bench_Names[queue[i].benchmark] );
 		fprintf(stdout, "%d\t" , queue[i].mid);
 		fprintf(stdout, "%"PRIu64"\t", queue[i].a_ciclos );
 		fprintf(stdout, "%"PRIu64"\t", queue[i].a_instrucciones);
@@ -743,10 +743,10 @@ int measure() {
 }
 
 /*************************************************************
- **                 llansar_proces                          **
+ **                 launch_process                          **
  *************************************************************/
 
-int llansar_proces (node *node) {
+int launch_process (node *node) {
 	FILE *fitxer;
 	pid_t pid;
 	
@@ -862,10 +862,10 @@ int llansar_proces (node *node) {
 }
 
 /*************************************************************
- **                 iniciar_events                          **
+ **                 initialize_events                          **
  *************************************************************/
 
-void iniciar_events(node *node) {
+void initialize_events(node *node) {
 	int i, ret;
 
 	// Configure events
@@ -887,10 +887,10 @@ void iniciar_events(node *node) {
 }
 
 /*************************************************************
- **                 finalitzar_events                       **
+ **                 finalize_events                       **
  *************************************************************/
 
-void finalitzar_events (node *node) {
+void finalize_events (node *node) {
   int i;
 
   // Releases descriptors
@@ -903,10 +903,10 @@ void finalitzar_events (node *node) {
 }
 
 /*************************************************************
- **                 iniciar_contadors                       **
+ **                 initialize_counters                       **
  *************************************************************/
 
-void iniciar_contadors (node *node) {
+void initialize_counters (node *node) {
   int i;
 
   node->current_counter = 0;
@@ -1019,7 +1019,7 @@ int main(int argc, char **argv) {
 				break;
 			case 'A':
 				carga = atoi(optarg);
-				N = nmezclas[carga]; // N -> Num. of proc. in workload
+				N = bench_mixes[carga]; // N -> Num. of proc. in workload
 				// Select predefined cores
 				queue[0].core = 0;
 				queue[1].core = 8;
@@ -1097,7 +1097,7 @@ int main(int argc, char **argv) {
 	}
 	// Workload allocation
 	for (i=0; i<N; i++) {
-		queue[i].benchmark = mezclas[carga][i];
+		queue[i].benchmark = workload_mixes[carga][i];
 	}
 	// Check that everyone has the benchmark and the assigned core
 	for (i=0; i<N; i++) {
@@ -1112,7 +1112,7 @@ int main(int argc, char **argv) {
 	}
 	// Init. Counters
 	for (i=0; i<N; i++) {
-		iniciar_contadors (&(queue[i])); 	
+		initialize_counters (&(queue[i])); 	
 	}
 	// Core set
 	for (i=0; i<N; i++) {
@@ -1125,8 +1125,8 @@ int main(int argc, char **argv) {
 	}
 	// Create process.
 	for(i=0; i<N; i++) {
-		llansar_proces(&(queue[i]));
-		iniciar_events(&(queue[i]));
+		launch_process(&(queue[i]));
+		initialize_events(&(queue[i]));
 	}
 	fprintf(stdout, "###################################################################################################");
 	fprintf(stdout, "\n");
@@ -1135,7 +1135,7 @@ int main(int argc, char **argv) {
 	fprintf(stdout, "Workload:\t%d\nNumeroBenchs:\t%d\nBenchmarks:\t",carga,N);
 	fprintf(stdout, "MaxC:\t%lf\tMaxBW:%lf\n",g_stats.max_c,g_stats.max_bw);
 	for (i=0; i<N; i++) { 
-		fprintf(stdout, "%s(%d)\t", benchNames[queue[i].benchmark], queue[i].mid );
+		fprintf(stdout, "%s(%d)\t", bench_Names[queue[i].benchmark], queue[i].mid );
 	}
 	fprintf(stdout, "\n");
 	time_t t = time(NULL);
@@ -1149,16 +1149,16 @@ int main(int argc, char **argv) {
 			for (i=0; i<N; i++) {
 				if (queue[i].pid == -1) {
 					get_counts(&(queue[i]));
-					finalitzar_events(&(queue[i]));
-					if(queue[i].tot_instrucciones < instruccions_totals[queue[i].benchmark]) {
-						llansar_proces (&(queue[i]));
-						iniciar_events (&(queue[i]));
+					finalize_events(&(queue[i]));
+					if(queue[i].tot_instrucciones < bench_Instructions[queue[i].benchmark]) {
+						launch_process (&(queue[i]));
+						initialize_events (&(queue[i]));
 					}		
 				}
 			}
 		}
 		for (i=0; i<N; i++) {
-			if(queue[i].tot_instrucciones >= instruccions_totals[queue[i].benchmark]) {	
+			if(queue[i].tot_instrucciones >= bench_Instructions[queue[i].benchmark]) {	
 				if(!queue[i].finalizado) {
 					fin_ejecucion++;
 					queue[i].finalizado = 1;
@@ -1166,11 +1166,11 @@ int main(int argc, char **argv) {
 				if (queue[i].pid > 0) {
 					kill(queue[i].pid, 9);
 					queue[i].pid = -1;
-					finalitzar_events(&(queue[i]));
+					finalize_events(&(queue[i]));
 				}
 				queue[i].tot_instrucciones = 0;
-				llansar_proces (&(queue[i]));
-				iniciar_events (&(queue[i]));
+				launch_process (&(queue[i]));
+				initialize_events (&(queue[i]));
 			}
 		}
 		quantums++;
@@ -1179,7 +1179,7 @@ int main(int argc, char **argv) {
 	for (i=0; i<N; i++) {
 		if (queue[i].pid > 0) {
 			kill(queue[i].pid, 9);
-			finalitzar_events(&(queue[i]));
+			finalize_events(&(queue[i]));
 		}
 	}
 	// Free libpfm resources cleanly
@@ -1187,7 +1187,7 @@ int main(int argc, char **argv) {
   	// Print the results
   	fprintf(fichero_out, "-\tBenchmark\tinstrucciones\tciclos\tLLC_LOAD_MISSES\tPM_MEM_PREF\n");
 	for (c=0; c<N; c++)	{
-		fprintf(fichero_out, "Final Counter:\t%s\t%ld\t%ld\t%ld\t%ld\n", benchNames[queue[c].benchmark], queue[c].totes_instruccions, queue[c].totes_ciclos, queue[c].totes_LLC_LOAD_MISSES, queue[c].totes_PM_MEM_PREF);
+		fprintf(fichero_out, "Final Counter:\t%s\t%ld\t%ld\t%ld\t%ld\n", bench_Names[queue[c].benchmark], queue[c].totes_instruccions, queue[c].totes_ciclos, queue[c].totes_LLC_LOAD_MISSES, queue[c].totes_PM_MEM_PREF);
 	}
 	t = time(NULL);
 	tm = *localtime(&t);
