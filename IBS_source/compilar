@@ -22,10 +22,10 @@ echo 'This program comes with ABSOLUTELY NO WARRANTY; for details type show w.'
 echo 'This is free software, and you are welcome to redistribute it under certain conditions type show c for details.'
 echo ''
 
-rm -rf ../working_dir/libpfm-4.10.1/perf_examples/IBS*
+rm -rf ../libpfm-4.10.1/perf_examples/IBS*
 
-if cp Makefile IBS.c ../working_dir/libpfm-4.10.1/perf_examples/ ; then
-	if cd ../working_dir/libpfm-4.10.1/perf_examples/ ; then
+if cp Makefile IBS.c ../libpfm-4.10.1/perf_examples/ ; then
+	if cd ../libpfm-4.10.1/perf_examples/ ; then
 		if make ; then
 			if cp -rf IBS ../../ ; then
 				echo "Process finished successfully."

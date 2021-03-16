@@ -263,7 +263,14 @@ char *benchmarks[][200] = {
     // 54 -> exchange2_r
     {"/home/malursem/working_dir_test/spec_bin2017/exchange2_r.ppc64","6",NULL},
     // 55 -> perlbench_r diffmail
-    {"/home/malursem/working_dir_test/spec_bin2017/perlbench_r.ppc64", "-I/home/malursem/working_dir_test/CPU2017/500.perlbench_r/lib", "/home/malursem/working_dir_test/CPU2017/500.perlbench_r/diffmail.pl", "4", "800", "10", "17", "19", "300", NULL}
+    {"/home/malursem/working_dir_test/spec_bin2017/perlbench_r.ppc64", "-I/home/malursem/working_dir_test/CPU2017/500.perlbench_r/lib", "/home/malursem/working_dir_test/CPU2017/500.perlbench_r/diffmail.pl", "4", "800", "10", "17", "19", "300", NULL},
+	/*
+		Validation apps
+	*/
+	// 56 -> gcc expr2
+    {"/home/malursem/working_dir/spec_bin/gcc.ppc64", "/home/malursem/working_dir/CPU2006/403.gcc/data/ref/input/expr2.i", "-o", "expr2.s", NULL},
+	// 57 -> bzip2 text
+    {"/home/malursem/working_dir/spec_bin/bzip2.ppc64", "/home/malursem/working_dir/CPU2006/401.bzip2/data/ref/input/text.html", "280", NULL}
 };
 
 /*************************************************************
@@ -277,7 +284,8 @@ char *bench_Names [] = {
 	"lbm","tonto","calculix","null","null","null","perlbench_r checkspam","gcc_r",//24--31
 	"mcf_r","omnetpp_s","xalancbmk_s","x264_s","deepsjeng_r","leela_s","exchange2_s","xz_r 1",//32--39
 	"bwaves_r","cactuBSSN_r","lbm_r","wrf_s","pop2_s","imagick_r","nab_s","fotonik3d_r",//40--47
-	"roms_r","namd_r","parest_r","povray_r","xz_r 2","xz_r 3","exchange2_r","perlbench_r diffmail"//48--55
+	"roms_r","namd_r","parest_r","povray_r","xz_r 2","xz_r 3","exchange2_r","perlbench_r diffmail",//48--55
+	"gcc expr2","bzip2 text"//56--57
 };
 
 /*************************************************************
@@ -303,7 +311,8 @@ unsigned long int bench_Instructions [] = {
 	667552291671,979918078612,1166159554490,0,0,0,878297396047,827749742594,//24--31
 	452161239739,0,654338747576,1269764691582,913289873736,796433853679,0,534316783838,//32--39
 	0,265381826929,630784833095,0,0,1679944953990,0,0,//40--47
-	872622924668,1050380054119,863491300167,941815758997,907669994640,761005521363,0,1046945879024//48--55
+	872622924668,1050380054119,863491300167,941815758997,907669994640,761005521363,0,1046945879024,//48--55
+	722448251903,871257791611//56--57
 };
 
 /*************************************************************
@@ -372,7 +381,15 @@ int bench_mixes [] = { // Numero de cargas que contiene la mezcla
 	10,	// 52
 	10,	// 53
 	10,	// 54
-	10	// 55
+	10,	// 55
+
+	//Validation workloads
+	6, // 56
+	6, // 57
+	8, // 58
+	8, // 59
+	10,// 60
+	10 // 61
 };
 
 /*************************************************************
@@ -441,7 +458,16 @@ int workload_mixes [][12] = { // Cargas a ejecutar
 	{36, 11, 34, 35, 42, 11, 7, 9, 6, 37},// 52
 	{7, 8, 7, 3, 9, 19, 10, 13, 3, 23},// 53
 	{22, 23, 9, 19, 5, 3, 19, 13, 9, 5},// 54
-	{8, 8, 18, 3, 13, 3, 21, 1, 19, 15} // 55
+	{8, 8, 18, 3, 13, 3, 21, 1, 19, 15}, // 55
+
+	//Validation workloads
+	{6, 23,57, 1, 8, 56}, // 56
+	{22, 56, 57, 18, 11, 8}, // 57
+	{42, 51, 56, 57, 15, 21, 7, 7}, // 58
+	{50, 50, 56, 57, 3, 12, 12, 11}, // 59
+	{32, 51, 56, 57, 36, 18, 2, 2, 6, 23},// 60
+	{36, 36, 56, 32, 57, 12, 17, 12, 11, 23} // 61
+
 };
 
 /*************************************************************
