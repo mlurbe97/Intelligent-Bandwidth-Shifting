@@ -1,0 +1,29 @@
+#!/bin/bash
+
+## IBS: Intelligent Bandwidth Shifting scheduler implementation.
+## Year: 2020
+## Author: Manel Lurbe Sempere <malursem@gap.upv.es>
+
+echo ''
+echo 'IBS: Intelligent Bandwidth Shifting scheduler implementation. Year: 2020 Author: Manel Lurbe Sempere <malursem@gap.upv.es>.'
+echo ''
+
+rm -rf ../libpfm-4.10.1/perf_examples/IBS*
+
+if cp Makefile IBS.c ../libpfm-4.10.1/perf_examples/ ; then
+	if cd ../libpfm-4.10.1/perf_examples/ ; then
+		if make ; then
+			if cp -rf IBS ../../ ; then
+				echo "Process finished successfully."
+			else
+				echo "Error copying programs."
+			fi
+		else
+			echo "Error compiling the program."
+		fi
+	else
+		echo "Error changing the directory."
+	fi
+else
+	echo "Error coping files."
+fi
